@@ -1,0 +1,120 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET , DATA, READONLY ;the cod
+                                                            e should be savedin
+                                                             RAM
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         
+    4 00000000         __Vectors
+    5 00000000 10001000        DCD              0X10001000  ;stack pointer valu
+                                                            e stack is empty
+    6 00000004 00000000        DCD              Reset_Handler ;reset vector
+    7 00000008                 ALIGN
+    8 00000008                 AREA             mycode , CODE, READONLY
+    9 00000000                 ENTRY
+   10 00000000                 EXPORT           Reset_Handler
+   11 00000000         Reset_Handler                        ;till here info giv
+                                                            en to compiler
+   12 00000000 F04F 0010       MOV              R0 , #0x10  ;numonics or instru
+                                                            ctions or opcore-op
+                                                            erational core and 
+                                                            end part is adressi
+                                                            ng mode-#0x123
+   13 00000004 F04F 010A       MOV              R1 , #10
+   14 00000008 F102 0221       ADD              R2 , #33
+   15 0000000C 440A            ADD              R2 , R1
+   16 0000000E F04F 3422       LDR              R4 , =0X22222222
+   17 00000012         STOP
+   18 00000012 E7FE            B                STOP
+   19 00000014 0000000A 
+                       NUM     EQU              10
+   20 00000014 00000008 
+              00123456 
+              020F76D3 SRC     DCD              8, 0X123456 ,34567891
+   21 00000020                 END
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=pract.d 
+-opract.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\
+NXP\LPC17xx --predefine="__EVAL SETA 1" --list=pract.lst pract.asm
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file pract.asm
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 4 in file pract.asm
+   Uses
+      At line 2 in file pract.asm
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 11 in file pract.asm
+   Uses
+      At line 6 in file pract.asm
+      At line 10 in file pract.asm
+
+SRC 00000014
+
+Symbol: SRC
+   Definitions
+      At line 20 in file pract.asm
+   Uses
+      None
+Comment: SRC unused
+STOP 00000012
+
+Symbol: STOP
+   Definitions
+      At line 17 in file pract.asm
+   Uses
+      At line 18 in file pract.asm
+Comment: STOP used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 8 in file pract.asm
+   Uses
+      None
+Comment: mycode unused
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+NUM 0000000A
+
+Symbol: NUM
+   Definitions
+      At line 19 in file pract.asm
+   Uses
+      None
+Comment: NUM unused
+1 symbol
+338 symbols in table
