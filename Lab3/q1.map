@@ -1,0 +1,13 @@
+ARM Linker, 5.03 [Build 24] [MDK-ARM Lite]
+
+==============================================================================
+
+Section Cross References
+
+    q1.o(RESET) refers to q1.o(mycode) for Reset_Handler
+    q1.o(RESET) refers to q2.o(mycode) for Reset_Handler
+    q1.o(mycode) refers to q1.o(mydata) for total
+    q2.o(RESET) refers to q1.o(mycode) for Reset_Handler
+    q2.o(RESET) refers to q2.o(mycode) for Reset_Handler
+    q2.o(mycode) refers to q2.o(mydata) for result
+
