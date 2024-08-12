@@ -1,0 +1,150 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         
+    4 00000000         __Vectors
+    5 00000000 10001000        DCD              0x10001000  ; Stack pointer val
+                                                            ue (stack is empty)
+                                                            
+    6 00000004 00000000        DCD              Reset_Handler ; Reset vector
+    7 00000008         
+    8 00000008                 ALIGN
+    9 00000008         
+   10 00000008                 AREA             mycode, CODE, READONLY
+   11 00000000                 ENTRY
+   12 00000000                 EXPORT           Reset_Handler
+   13 00000000         
+   14 00000000         Reset_Handler
+   15 00000000         ; Load the address of the hex number into R0
+   16 00000000 480A            LDR              R0, =hex_number ; Load the addr
+                                                            ess of the hex numb
+                                                            er into R0
+   17 00000002 6801            LDR              R1, [R0]    ; Load the hex numb
+                                                            er into R1
+   18 00000004         
+   19 00000004         ; Convert the hexadecimal number to BCD
+   20 00000004 460A            MOV              R2, R1      ; Copy the number t
+                                                            o R2
+   21 00000006 EA4F 1312       MOV              R3, R2, LSR #4 ; Extract the hi
+                                                            gh nibble (tens dig
+                                                            it)
+   22 0000000A F003 030F       AND              R3, R3, #0x0F ; Mask the high n
+                                                            ibble to get the BC
+                                                            D value
+   23 0000000E F103 0330       ADD              R3, R3, #0x30 ; Convert to ASCI
+                                                            I (BCD digit)
+   24 00000012 7103            STRB             R3, [R0, #4] ; Store the high n
+                                                            ibble BCD result at
+                                                             the address of `bc
+                                                            d_result`
+   25 00000014         
+   26 00000014 F001 020F       AND              R2, R1, #0x0F ; Extract the low
+                                                             nibble (ones digit
+                                                            )
+   27 00000018 F102 0230       ADD              R2, R2, #0x30 ; Convert to ASCI
+                                                            I (BCD digit)
+   28 0000001C 7142            STRB             R2, [R0, #5] ; Store the low ni
+                                                            bble BCD result at 
+                                                            the address of `bcd
+                                                            _result + 1`
+   29 0000001E         
+   30 0000001E         ; Infinite loop to stop execution
+   31 0000001E         STOP
+   32 0000001E E7FE            B                STOP
+   33 00000020         
+   34 00000020 0000000F 
+                       hex_number
+                               DCD              0xF         ; Example hexadecim
+                                                            al number (0x2A)
+   35 00000024 00000000 
+              00000000 bcd     DCD              0,0         ; Reserve 2 bytes f
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                                                            or BCD result
+   36 0000002C         
+   37 0000002C                 END
+              00000000 
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=q3.d -oq
+3.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NXP\LP
+C17xx --predefine="__EVAL SETA 1" --list=q3.lst q3.asm
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file q3.asm
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 4 in file q3.asm
+   Uses
+      At line 2 in file q3.asm
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 14 in file q3.asm
+   Uses
+      At line 6 in file q3.asm
+      At line 12 in file q3.asm
+
+STOP 0000001E
+
+Symbol: STOP
+   Definitions
+      At line 31 in file q3.asm
+   Uses
+      At line 32 in file q3.asm
+Comment: STOP used once
+bcd 00000024
+
+Symbol: bcd
+   Definitions
+      At line 35 in file q3.asm
+   Uses
+      None
+Comment: bcd unused
+hex_number 00000020
+
+Symbol: hex_number
+   Definitions
+      At line 34 in file q3.asm
+   Uses
+      At line 16 in file q3.asm
+Comment: hex_number used once
+mycode 00000000
+
+Symbol: mycode
+   Definitions
+      At line 10 in file q3.asm
+   Uses
+      None
+Comment: mycode unused
+5 symbols
+340 symbols in table
